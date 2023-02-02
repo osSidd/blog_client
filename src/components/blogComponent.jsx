@@ -9,17 +9,17 @@ export default function BlogComponent({blog, specific}){
     }
 
     return (
-        <div className="mr-auto ml-auto w-9/12">
+        <div 
+            className="bg-gray-50 my-2 mr-auto ml-auto py-4 px-6 shadow-lg transition-shadow ease-in-out duration-300 hover:shadow-2xl rounded-xl">
             <div 
                 onClick={specific? () => {} : handleClick}
-                className="shadow-lg hover:shadow-2xl rounded-md transition-shadow mt-12 mb-3  p-4 bg-gray-50"
             >
-                <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
-                <p className="text-gray-500 mb-4">{blog.snippet}</p>
-                <span className="mb-4 block text-gray-600">
+                <h1 className="text-2xl my-4">{blog.title}</h1>
+                <span className="text-slate-500">
                     {formatDistanceToNow(new Date(blog.createdAt), {addSuffix: true})}
                 </span>
-                {specific && <p>{blog.body}</p>}
+                <p className="w-8/12 my-4">{blog.snippet}</p>
+                {specific && <p className="my-4 text-lg">{blog.body}</p>}
             </div>
         </div>
     )
