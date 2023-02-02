@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import {formatDistanceToNow} from 'date-fns'
 
-import Comments from './comments'
-
 export default function BlogComponent({blog, specific}){
     const navigate = useNavigate()
 
@@ -10,7 +8,6 @@ export default function BlogComponent({blog, specific}){
         navigate('/'+ blog._id)
     }
 
-    console.log(blog.comments)
     return (
         <div className="mr-auto ml-auto w-9/12">
             <div 
@@ -24,7 +21,6 @@ export default function BlogComponent({blog, specific}){
                 </span>
                 {specific && <p>{blog.body}</p>}
             </div>
-            {(blog.comments.length > 0 && specific) && <Comments blog={blog}/>}
         </div>
     )
 }

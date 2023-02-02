@@ -3,6 +3,8 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 import BlogComponent from "../components/blogComponent"
+import Comments from '../components/comments'
+import CommentForm from '../components/commentForm'
 
 export default function SpecificBlog(){
 
@@ -33,7 +35,7 @@ export default function SpecificBlog(){
             console.log('specific')
         }
     }, [])
-
+    console.log(blogs)
     const params = useParams()
     const id = params.id
 
@@ -42,11 +44,19 @@ export default function SpecificBlog(){
     return(
         <div>
             {blog &&
-            <BlogComponent 
-                key={blog._id} 
-                blog={blog} 
-                specific={true}
-            />}
+            <div>
+                <BlogComponent 
+                    key={blog._id} 
+                    blog={blog} 
+                    specific={true}
+                />
+                {(blog.comments.length > 0) && 
+                    <div className="flex justify-between items-start">
+                        <Comments blog={blog}/>
+                        <CommentForm id={blog._id}/>
+                    </div>}
+            </div>
+            }
         </div>
     )
 }

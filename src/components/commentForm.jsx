@@ -2,7 +2,7 @@ import { useState } from "react"
 import useBlogsContext from "../hooks/useBlogContext"
 
 export default function CommentForm({id}){
-    const {blogs, dispatch} = useBlogsContext()
+    const {dispatch} = useBlogsContext()
 
     const [formData, setFormData] = useState({
         text: '',
@@ -28,35 +28,41 @@ export default function CommentForm({id}){
         })
         if(!response.ok)
             console.log('error')
-        if(response){
-           const json = fetchBlogs()
-           dispatch({
-            type: 'SET_ALL_BLOGS',
-            payload: json,
-           })
+        if(response.ok){
+            fetchBlogs()
+            setFormData({
+                text: '',
+                author: ''
+            })
         }
     }
 
     async function fetchBlogs(){
         const response = await fetch(import.meta.env.VITE_URL)
         const json = await response.json()
-        if(response)
-            return json;
+        if(response.ok){
+            dispatch({
+                type: 'SET_ALL_BLOGS',
+                payload: json,
+            })
+        }
         else
             throw new Error('error')
     }
 
     return(
-        <form onSubmit={submitForm}>
+        <form onSubmit={submitForm} className="p-4 w-5/12 mt-5 shadow-lg bg-gray-100 rounded-lg">
             <label htmlFor="text">comment:</label>
-            <input 
+            <textarea 
                 type="text" 
                 name="text" 
                 onChange={handleChange} 
                 id="text"
                 placeholder="Comment"
                 value={formData.text}
-            />
+                className="block w-full p-2 mb-4 mt-2"
+                required={true}
+            ></textarea>
 
             <label htmlFor="author">author:</label>
             <input 
@@ -66,9 +72,11 @@ export default function CommentForm({id}){
                 id="author"
                 placeholder="Author"
                 value={formData.author}
+                className="block w-full p-2 mt-2"
+                required={true}
             />
 
-            <button type="submit">post comment</button>
+            <button type="submit" className="bg-teal-500 text-white p-2 rounded-md mt-8">post comment</button>
         </form>
     )
 }
