@@ -2,7 +2,7 @@ import { useState } from "react"
 import useBlogsContext from "../hooks/useBlogContext"
 
 export default function CommentForm({id}){
-    const {dispatch} = useBlogsContext()
+    const {blogs, dispatch} = useBlogsContext()
 
     const [formData, setFormData] = useState({
         text: '',
@@ -19,39 +19,39 @@ export default function CommentForm({id}){
 
     async function submitForm(e){
         e.preventDefault()
-        const response = await fetch(import.meta.env.VITE_URL+id, {
-            method: "PATCH",
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        if(!response.ok)
-            console.log('error')
-        if(response.ok){
-            fetchBlogs()
-            setFormData({
-                text: '',
-                author: ''
+        try{
+            const response = await fetch(import.meta.env.VITE_URL+id, {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-        }
-    }
+            const json = await response.json()
 
-    async function fetchBlogs(){
-        const response = await fetch(import.meta.env.VITE_URL)
-        const json = await response.json()
-        if(response.ok){
-            dispatch({
-                type: 'SET_ALL_BLOGS',
-                payload: json,
-            })
+            if(!response.ok)
+                console.log('error')
+                
+            if(response.ok){
+                dispatch({
+                    type: "CREATE_A_COMMENT",
+                    payload:{
+                        blog: json.blog,
+                        comment: json.comment,
+                    }
+                })
+                setFormData({
+                    text: '',
+                    author: ''
+                })
+            }
+        }catch(err){
+            console.log(err.message)
         }
-        else
-            throw new Error('error')
     }
 
     return(
-        <form onSubmit={submitForm} className="p-4 w-5/12 mt-5 shadow-lg bg-gray-100 rounded-lg">
+        <form onSubmit={submitForm} className="p-4 w-5/12 mt-5 shadow-xl bg-gray-100 rounded-lg">
             <label htmlFor="text">comment:</label>
             <textarea 
                 type="text" 
