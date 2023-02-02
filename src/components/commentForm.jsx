@@ -1,55 +1,9 @@
-import { useState } from "react"
-import useBlogsContext from "../hooks/useBlogContext"
+import useCommentPost from "../hooks/useCommentPost";
 
 export default function CommentForm({id}){
-    const {blogs, dispatch} = useBlogsContext()
 
-    const [formData, setFormData] = useState({
-        text: '',
-        author: ''
-    })
-
-    function handleChange(e){
-        const {name, value} = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name] : value,
-        }))
-    }
-
-    async function submitForm(e){
-        e.preventDefault()
-        try{
-            const response = await fetch(import.meta.env.VITE_URL+id, {
-                method: "POST",
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            const json = await response.json()
-
-            if(!response.ok)
-                console.log('error')
-                
-            if(response.ok){
-                dispatch({
-                    type: "CREATE_A_COMMENT",
-                    payload:{
-                        blog: json.blog,
-                        comment: json.comment,
-                    }
-                })
-                setFormData({
-                    text: '',
-                    author: ''
-                })
-            }
-        }catch(err){
-            console.log(err.message)
-        }
-    }
-
+    const {formData, handleChange, submitForm} = useCommentPost(id)
+ 
     return(
         <form onSubmit={submitForm} className="p-4 w-5/12 mt-5 shadow-xl bg-gray-100 rounded-lg">
             <label htmlFor="text">comment:</label>

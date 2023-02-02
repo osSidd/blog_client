@@ -6,18 +6,36 @@ export const BlogsContextProvider = ({children}) => {
 
     function reducer(state, action){
         switch(action.type){
-            case 'BLOGS_LIST':
-                return action.payload
+            case 'SET_BLOGS':
+                return {
+                    ...state,
+                    blogs: action.payload,
+                }
+            
+            case 'SET_COMMENTS':
+                return {
+                    ...state,
+                    comments: action.payload
+                }
+            
+            case 'ADD_COMMENT':
+                return {
+                    ...state,
+                    comments:[action.payload, ...state.comments]
+                }
 
             default:
                 return state
         }
     }
 
-    const [blogs, dispatch] = useReducer(reducer, [])
+    const [blogsData, dispatch] = useReducer(reducer, {
+        blogs:[],
+        comments:[]
+    })
 
     return (
-        <BlogsContext.Provider value={{blogs, dispatch}}>
+        <BlogsContext.Provider value={{...blogsData, dispatch}}>
             {children}
         </BlogsContext.Provider>
     )

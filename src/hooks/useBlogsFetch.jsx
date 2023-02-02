@@ -17,7 +17,7 @@ export default function useBlogsFetch(){
 
                 if(response){
                     dispatch({
-                        type: 'BLOGS_LIST',
+                        type: 'SET_BLOGS',
                         payload: json
                     })
                 }
@@ -27,6 +27,5 @@ export default function useBlogsFetch(){
         }
 
         fetchBlogs()
-        console.log('home')
     }, [])
 }
