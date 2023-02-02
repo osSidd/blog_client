@@ -30,7 +30,7 @@ export default function SpecificBlog(){
         }
         if(blogs.length === 0){
             fetchBlogs()
-            console.log('request made')
+            console.log('specific')
         }
     }, [])
 

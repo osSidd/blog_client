@@ -29,6 +29,7 @@ export default function Home(){
         }
 
         fetchBlogs()
+        console.log('home')
     }, [])
 
     return (
