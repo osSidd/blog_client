@@ -30,9 +30,9 @@ export default function Home(){
 
         fetchBlogs()
     }, [])
-    console.log(blogs)
+
     return (
-        <div>
+        <div className="mt-10">
             {blogs && blogs.map(blog => {
                 return (
                     <BlogComponent 

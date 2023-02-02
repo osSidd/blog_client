@@ -8,8 +8,6 @@ export const BlogsContextProvider = ({children}) => {
         switch(action.type){
             case 'SET_ALL_BLOGS':
                 return action.payload
-            case 'SET_A_BLOG':
-                return state.filter(item => item._id === action.payload._id)
             default:
                 return state
         }

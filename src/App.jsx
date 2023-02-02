@@ -5,7 +5,7 @@ import SpecificBlog from './pages/specificBlog'
 
 function App() {
   return(
-    <div>
+    <div className='w-11/12'>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>

@@ -7,13 +7,11 @@ import BlogComponent from "../components/blogComponent"
 export default function SpecificBlog(){
 
     const {blogs, dispatch} = useBlogsContext()
-    const params = useParams()
-    const id = params.id
 
     useEffect(() => {
-        const fetchBlogs = async() => {
+        async function fetchBlogs(){
             try{
-                const response = await fetch(import.meta.env.VITE_URL+id)
+                const response = await fetch(import.meta.env.VITE_URL)
                 const json = await response.json()
 
                 if (!response.ok){
@@ -22,31 +20,33 @@ export default function SpecificBlog(){
 
                 if(response){
                     dispatch({
-                        type: 'SET_A_BLOG',
+                        type: 'SET_ALL_BLOGS',
                         payload: json
                     })
                 }
             }catch(err){
                 console.log(err.message)
             }
-
-            return () => {
-                console.log('cleanup')
-            }
         }
-
-        fetchBlogs()
+        if(blogs.length === 0){
+            fetchBlogs()
+            console.log('request made')
+        }
     }, [])
 
-    console.log(blogs)
+    const params = useParams()
+    const id = params.id
+
+    const blog = blogs.find(blog => blog._id === id)
+
     return(
         <div>
-            Hi there
+            {blog &&
             <BlogComponent 
-                key={blogs[0]._id} 
-                blog={blogs[0]} 
+                key={blog._id} 
+                blog={blog} 
                 specific={true}
-            />
+            />}
         </div>
     )
 }
