@@ -1,4 +1,5 @@
 import useComments from "../hooks/useCommentsFetch"
+import useBlogsContext from "../hooks/useBlogContext"
 
 import { useParams } from "react-router-dom"
 
@@ -11,13 +12,12 @@ export default function SpecificBlog(){
     const params = useParams()
     const id = params.id
 
-    const {blog, comments} = useComments(id)
-
-    console.log('specific')
+    useComments(id)
+    const {blog, comments} = useBlogsContext()
 
     return(
         <div>
-            {blog &&
+            {blog._id &&
             <div className="px-20">
                 <BlogComponent 
                     key={blog._id} 

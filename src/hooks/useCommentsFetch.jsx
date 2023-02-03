@@ -3,20 +3,7 @@ import useBlogsContext from "./useBlogContext"
 
 export default function useComments(id){
 
-    console.log('fetching comments')
-    const {blogs,comments, dispatch} = useBlogsContext()
-
-    async function fetchBlogs(){
-      const response = await fetch(import.meta.env.VITE_URL)
-      const json = await response.json()
-
-      if(response.ok){
-        dispatch({
-          type: 'SET_BLOGS',
-          payload: json
-        })
-      }
-    }
+    const {dispatch} = useBlogsContext()
 
     useEffect(() => {
         async function fetchComments(){
@@ -26,20 +13,11 @@ export default function useComments(id){
 
          if(response.ok){
            dispatch({
-            type: 'SET_COMMENTS',
+            type: 'SET_BLOG_COMMENTS',
             payload: json,
            })
-         }
-
-         if(!blogs.length){
-            fetchBlogs()
-         }
-         
+         }         
         }
         fetchComments()
     }, [])
-
-    const blog = blogs.find(blog => blog._id === id)
-    console.log(blogs,comments)
-    return {blog, comments}
 }

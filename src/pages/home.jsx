@@ -2,6 +2,7 @@ import useBlogsContext from "../hooks/useBlogContext"
 import useBlogsFetch from "../hooks/useBlogsFetch"
 
 import BlogComponent from "../components/blogComponent"
+import Loading from '../components/loading'
 
 export default function Home(){
 
@@ -10,7 +11,7 @@ export default function Home(){
     
     return (
         <div className="bg-gray-100 px-20 py-10 flex items-start gap-10 min-h-screen">
-            {blogs && blogs.map(blog => {
+            {blogs ? blogs.map(blog => {
                 return (
                     <BlogComponent 
                         key={blog._id} 
@@ -18,7 +19,7 @@ export default function Home(){
                         specific={false}
                     />
                 )
-            })}
+            }): <Loading/>}
         </div>
     )
 }

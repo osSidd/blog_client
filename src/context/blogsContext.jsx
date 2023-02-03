@@ -12,10 +12,11 @@ export const BlogsContextProvider = ({children}) => {
                     blogs: action.payload,
                 }
             
-            case 'SET_COMMENTS':
+            case 'SET_BLOG_COMMENTS':
                 return {
                     ...state,
-                    comments: action.payload
+                    comments: action.payload.comments,
+                    blog:action.payload.blog
                 }
             
             case 'ADD_COMMENT':
@@ -31,7 +32,8 @@ export const BlogsContextProvider = ({children}) => {
 
     const [blogsData, dispatch] = useReducer(reducer, {
         blogs:[],
-        comments:[]
+        comments:[],
+        blog:{}
     })
 
     return (

@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import Home from "./pages/home"
 import SpecificBlog from './pages/specificBlog'
+import ErrorPage from './pages/error'
 
 function App() {
   return(
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path='/:id' element={<SpecificBlog/>}/>
+          <Route path="*" element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>
