@@ -3,6 +3,7 @@ import useBlogsContext from "./useBlogContext"
 
 export default function useComments(id){
 
+    console.log('fetching comments')
     const {blogs,comments, dispatch} = useBlogsContext()
 
     async function fetchBlogs(){
@@ -39,6 +40,6 @@ export default function useComments(id){
     }, [])
 
     const blog = blogs.find(blog => blog._id === id)
-
+    console.log(blogs,comments)
     return {blog, comments}
 }

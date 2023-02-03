@@ -13,6 +13,8 @@ export default function SpecificBlog(){
 
     const {blog, comments} = useComments(id)
 
+    console.log('specific')
+
     return(
         <div>
             {blog &&
