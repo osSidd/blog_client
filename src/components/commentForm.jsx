@@ -5,7 +5,7 @@ export default function CommentForm({id}){
     const {formData, handleChange, submitForm} = useCommentPost(id)
  
     return(
-        <form onSubmit={submitForm} className="w-5/12 mt-5">
+        <form onSubmit={submitForm} className="w-10/12 mb-10 md:w-5/12 mt-5">
             <label htmlFor="text">Comment:</label>
             <textarea 
                 type="text" 

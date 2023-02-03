@@ -10,7 +10,7 @@ export default function Home(){
     const {blogs} = useBlogsContext()
     
     return (
-        <div className="bg-gray-100 px-20 py-10 flex items-start gap-10 min-h-screen">
+        <div className="bg-gray-100 px-4 md:px-20 py-10 flex flex-col md:flex-row items-start gap-10 min-h-screen">
             {blogs ? blogs.map(blog => {
                 return (
                     <BlogComponent 
