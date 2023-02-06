@@ -31,7 +31,7 @@ export default function Signup(){
                     onChange={handleChange}
                 />
 
-                <button type="submit" className="btn">Sign up</button>
+                <button type="submit" className="btn mt-6">Sign up</button>
             </form>
         </div>
     )

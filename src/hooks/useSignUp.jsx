@@ -1,6 +1,10 @@
 import { useState } from "react"
+import { useUserContext } from "./useUserContext"
 
 export default function useSignup(){
+
+    const {dispatch} = useUserContext()
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -21,7 +25,7 @@ export default function useSignup(){
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers:{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
                 }
             })
             const json = await response.json()
@@ -31,7 +35,11 @@ export default function useSignup(){
             }
 
             if(response.ok){
-                console.log(json)
+                dispatch({
+                    type: 'LOGIN',
+                    payload: json
+                })
+                localStorage.setItem('user', JSON.stringify(json))
             }
         }catch(err){
             console.log(err.message)

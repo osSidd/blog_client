@@ -4,9 +4,13 @@ import App from './App'
 import './index.css'
 
 import  { BlogsContextProvider }  from './context/blogsContext'
+import { UserContextProvider } from './context/userContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <BlogsContextProvider>
-      <App/>
-    </BlogsContextProvider>
+    <UserContextProvider>
+      <BlogsContextProvider>
+        <App/>
+      </BlogsContextProvider>
+    </UserContextProvider>
+   
 )

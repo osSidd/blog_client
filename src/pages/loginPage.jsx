@@ -31,7 +31,7 @@ export default function Login(){
                     onChange={handleChange}
                 />
 
-                <button type="submit" className="btn">Log in</button>
+                <button type="submit" className="btn mt-6">Log in</button>
             </form>
         </div>
     )

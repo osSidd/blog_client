@@ -1,9 +1,11 @@
 import useBlogsContext from "../hooks/useBlogContext"
+import { useUserContext } from "./useUserContext";
 import { useState } from "react";
 
 export default function useCommentPost(id){
 
     const {dispatch} = useBlogsContext()
+    const {token} = useUserContext()
     
     const [formData, setFormData] = useState({
         text: '',
@@ -29,7 +31,8 @@ export default function useCommentPost(id){
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             })
             const json = await response.json()
