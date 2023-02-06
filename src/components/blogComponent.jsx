@@ -10,7 +10,7 @@ export default function BlogComponent({blog, specific}){
 
     return (
         <div 
-            className="bg-gray-50 my-2 mr-auto ml-auto py-4 px-6 shadow-lg transition-shadow ease-in-out duration-300 hover:shadow-2xl rounded-xl">
+            className="my-2 mr-auto ml-auto py-4 px-6">
             <div 
                 onClick={specific? () => {} : handleClick}
             >

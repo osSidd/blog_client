@@ -10,14 +10,16 @@ export default function Home(){
     const {blogs} = useBlogsContext()
     
     return (
-        <div className="bg-gray-100 px-4 md:px-20 py-10 flex flex-col md:flex-row items-start gap-10 min-h-screen">
+        <div className="px-4 md:px-20 py-10 grid md:grid-cols-3 gap-10 items-start min-h-screen">
             {blogs ? blogs.map(blog => {
                 return (
-                    <BlogComponent 
-                        key={blog._id} 
-                        blog={blog} 
-                        specific={false}
-                    />
+                    <div className="shadow-lg transition-shadow ease-in-out duration-300 hover:shadow-2xl rounded-xl bg-white">
+                        <BlogComponent 
+                            key={blog._id} 
+                            blog={blog} 
+                            specific={false}
+                        />
+                    </div>
                 )
             }): <Loading/>}
         </div>

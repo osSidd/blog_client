@@ -24,11 +24,10 @@ export default function SpecificBlog(){
                     blog={blog} 
                     specific={true}
                 />
-                {(comments.length > 0) && 
-                    <div className="flex justify-evenly mt-12 items-start flex-col-reverse lg:flex-row">
-                        <Comments comments={comments}/>
-                        <CommentForm id={blog._id}/>
-                </div>}
+                 <div className="flex justify-evenly mt-12 items-start flex-col-reverse lg:flex-row">
+                    {(comments.length > 0) && <Comments comments={comments}/>}
+                    <CommentForm id={blog._id}/>
+                </div>
             </div>
             }
         </div>
