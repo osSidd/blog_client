@@ -5,7 +5,7 @@ export default function BlogComponent({blog, specific}){
     const navigate = useNavigate()
 
     function handleClick(e){
-        navigate('/'+ blog._id)
+        navigate('/blog/'+ blog._id)
     }
 
     return (

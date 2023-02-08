@@ -16,7 +16,14 @@ export const BlogsContextProvider = ({children}) => {
                 return {
                     ...state,
                     comments: action.payload.comments,
-                    blog:action.payload.blog
+                    blog: action.payload.blog
+                }
+            
+            case 'CLEAR_BLOG_COMMENTS':
+                return {
+                    ...state,
+                    comments: '',
+                    blog: ''
                 }
             
             case 'ADD_COMMENT':

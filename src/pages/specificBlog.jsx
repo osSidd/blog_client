@@ -1,5 +1,6 @@
 import useComments from "../hooks/useCommentsFetch"
 import useBlogsContext from "../hooks/useBlogContext"
+import { useUserContext } from "../hooks/useUserContext"
 
 import { useParams } from "react-router-dom"
 
@@ -14,6 +15,8 @@ export default function SpecificBlog(){
 
     useComments(id)
     const {blog, comments} = useBlogsContext()
+    const {user} = useUserContext()
+
 
     return(
         <div>
@@ -25,8 +28,10 @@ export default function SpecificBlog(){
                     specific={true}
                 />
                  <div className="flex justify-evenly mt-12 items-start flex-col-reverse lg:flex-row">
-                    {(comments.length > 0) && <Comments comments={comments}/>}
-                    <CommentForm id={blog._id}/>
+                    {user ? (comments.length > 0) && <Comments comments={comments}/> : <div className="text-lg font-semibold">
+                            Log in to view and post comments
+                        </div>}
+                    {user && <CommentForm id={blog._id}/>}
                 </div>
             </div>
             }

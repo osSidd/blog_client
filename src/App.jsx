@@ -8,10 +8,13 @@ import Login from './pages/loginPage'
 import Navbar from './components/navbar'
 
 import { useUserContext } from './hooks/useUserContext'
+import { useState } from 'react'
 
 function App() {
 
   const { user } = useUserContext()
+
+  console.log(user)
 
   return(
     <div>
@@ -19,8 +22,8 @@ function App() {
         <Navbar/>
         <div className=''>
           <Routes>
-            <Route path="/" element={user ? <Home/> : <Navigate to="/login"/>}/>
-            <Route path='/:id' element={user ? <SpecificBlog/> : <Navigate to="/login"/>}/>
+            <Route path="/" element={<Home/>}/>
+            <Route path='blog/:id' element={<SpecificBlog/>}/>
             <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/"/>}/>
             <Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>
             <Route path="*" element={<ErrorPage/>}/>
