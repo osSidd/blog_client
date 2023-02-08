@@ -10,11 +10,11 @@ export default function BlogComponent({blog, specific}){
 
     return (
         <div 
-            className="my-2 mr-auto ml-auto py-4 px-6">
+            className="py-4 pl-4 pr-0">
             <div 
                 onClick={specific? () => {} : handleClick}
             >
-                <h1 className="text-2xl my-4">{blog.title}</h1>
+                <h2 className="text-2xl my-4 font-semibold">{blog.title}</h2>
                 <span className="text-slate-500">
                     {formatDistanceToNow(new Date(blog.createdAt), {addSuffix: true})}
                 </span>
