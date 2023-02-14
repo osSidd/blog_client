@@ -5,10 +5,11 @@ import SpecificBlog from './pages/specificBlog'
 import ErrorPage from './pages/error'
 import Signup from './pages/signupPage'
 import Login from './pages/loginPage'
+import CreateBlog from './pages/createBlog'
+
 import Navbar from './components/navbar'
 
 import { useUserContext } from './hooks/useUserContext'
-import { useState } from 'react'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <div className=''>
           <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/post" element={<CreateBlog/>}/>
             <Route path='blog/:id' element={<SpecificBlog/>}/>
             <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/"/>}/>
             <Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>}/>

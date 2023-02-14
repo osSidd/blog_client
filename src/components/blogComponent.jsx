@@ -19,7 +19,7 @@ export default function BlogComponent({blog, specific}){
                     {formatDistanceToNow(new Date(blog.createdAt), {addSuffix: true})}
                 </span>
                 <p className="w-8/12 my-4">{blog.snippet}</p>
-                {specific && <p className="my-4 text-lg">{blog.body}</p>}
+                {specific && <div className="my-4 text-lg" dangerouslySetInnerHTML={{__html: blog.body}}/>}
             </div>
         </div>
     )
