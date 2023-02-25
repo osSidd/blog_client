@@ -65,7 +65,7 @@ export default function useBlogPost(){
 
     async function handleSubmit(e){
         e.preventDefault()
-       
+        setFormData(prev => ({...prev, body: log()}))
         const user = JSON.parse(localStorage.getItem('user'));
         console.log(user)
         if(user){

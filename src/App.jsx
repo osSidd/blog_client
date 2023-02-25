@@ -15,8 +15,6 @@ function App() {
 
   const { user } = useUserContext()
 
-  console.log(user)
-
   return(
     <div>
       <BrowserRouter>
